@@ -1,0 +1,101 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>test thymeleaf</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1>include test:</h1>
+
+<div th:include="included_template1::fr1(param2=${str_var2},param1='have a good')"></div> <!-- idea-130662 -->
+<h1>---------------</h1>
+
+<p th:text="#{test1.property1}">offline</p>
+
+<p th:text="#{test1.property3(${str_var1},${str_var2}+' in')}">idea-129954</p>
+
+<p th:text="#{test1.property4(${str_var1}+'!')}">idea-129954</p>
+
+<p th:text="${#dates.monthName(#dates.createToday())+'foobar!!'}"></p>
+
+
+<p th:text="'test simple properties and the if/default operations: '+ (*{bean1.txtProp1} ?: 'default value') +', '+ (${bean1.boolProp1} ? ${bean1.txtProp2} : ${'alternative value'})"></p>
+
+<p th:text="'test : '+${(bean1.boolProp1) and (bean1.intProp1 >= 0) ? bean1.txtProp2+#dates.createNow().toString() : 'failure' }">
+    idea-130166 - fixed</p>
+
+<p th:text="${#dates.createNow().getTime()}">idea-130175 - fixed </p>
+
+<p th:text="${#strings.substring(bean1.txtProp2,0,2).length()}">idea-130175 - fixed</p>
+
+<p th:text="${bean1.listProp1.get(0)}">idea-130175 - fixed</p>
+
+<p th:text="${str_var1.substring(1)}">idea-130175 - fixed</p>
+
+<p th:text="${bean1['bean2']['prop1']}">idea-130178</p>
+
+<p th:text="${bean1.bean2.returnCapitalizedString(bean1.arrayProp1[0]+' '+bean1.listProp1[0])}">idea-130180</p>
+
+<p th:text="${ - bean1.intProp1 }">idea-130181</p>
+
+<!--<p th:text="${ bean1.intProp1 <= (bean1.intProp1}">idea-130182 </p>-->
+
+<p th:text="${#locale}">idea-130183</p>
+
+<p th:text="|The variable *{bean1.txtProp2} is substituted |">idea-130172 - fixed</p>
+
+<p th:text="|The variables *{bean1.txtProp2}, ${bean1.txtProp1} and message #{test1.property1} are substituted |">
+    idea-130234</p>
+
+<p th:text="| literals 'foo' and 0 or true and various operations should not be parsed  |">idea-130234</p>
+
+<p th:text="'normal $-expression '+${bean1.txtProp2} + ' combined with substitution: ' + |${bean1.txtProp2} and ${str_var1} are substituted|">
+    idea-130231</p>
+
+<p th:text="valid_Literal_tokens">idea-130227</p>
+
+<p th:text="valid-[Literal-tokens]">idea-130227</p>
+
+<p th:text="valid.Literal.tokens">idea-130227</p>
+
+<p th:text="valid000Literal111tokens">idea-130227</p>
+
+
+<div th:object="${bean1.bean2}">
+    <p th:text="*{prop1}"></p>
+
+    <p th:text="${#object.prop2}"></p>
+</div>
+
+<p th:text="${__#{test1.property5('foo')}__}">idea-130246</p>
+
+<p th:text="${__${bean1.process('foo')}__}+${bean1.returnProcessed('bar')}">idea-130246</p>
+
+<p th:text="${@a.b.c.Bean3@method1(foo)}">idea-130249</p>
+
+<h1>th:include tests:</h1>
+
+<div th:include="included_template2::fr1"></div>
+<div th:include="included_template2::#iterations_tests"></div>
+
+<h1>th:with test</h1>
+
+<div th:include="::local_fr1" th:with="arg0=true, arg1=${prop3},arg2='some text'"></div>
+<div th:fragment="local_fr1" th:if="${arg0}">
+    <p th:text="${arg1}+${arg2}"/> <!-- idea-130666 -->
+</div>
+
+<h1>th:remove test</h1>
+  <div th:remove="all-but-first" >   <!-- idea-130671 -->
+     <p th:text="'one'" ></p>
+      <p th:text="'two'"></p>
+      <p th:text="'three'"></p>
+  </div>
+
+<h1> th:assert test </h1>
+<p th:assert="(${bean1.intProp1} gt 0),${bean1.boolProp1}"></p>      <!-- idea-130680 -->
+<p th:assert="(true,${bean1.boolProp1}"></p>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title></title>
+</head>
+<body>
+   <div th:fragment="fr1(param1,param2)">
+        <p th:text="'fragment run with parameters:'+${param1}+'  '+${param2}"></p>
+        <p th:utext="#{included.fragment1.prop1}"/>
+        <br/>
+        <input value="button" type="button" title="mybutton" th:attrprepend="value=${str_var1}+'_',title=${str_var1+'_'}" th:attrappend="value='_'+${str_var1},title=${'_'+str_var1}"/>
+       <br/>
+       <img onmouseover="alert('Hello!')" th:attr="src=@{/gtvglogo.png},title=${str_var1},alt=${str_var1}" />
+       <br/>
+       <a th:attr="href=@{/}">back</a>
+   </div>
+
+</body>
+</html>

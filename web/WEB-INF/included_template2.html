@@ -1,0 +1,36 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+</head>
+<body>
+<div th:fragment="fr1">
+    <p th:utext="#{included.fragment1.prop2}">not defined property prop2</p>
+
+    <p th:utext="#{included.fragment1.prop3}">not defined property prop3</p>
+
+    <p data-th-text="${'test data-th-* syntax: '+str_var1}">idea-130332</p>
+
+
+    <div th:if="true">if_test</div>
+    <div th:unless="0>1">unless_test</div>
+    <div th:switch="${bean1.bean2.prop3[1]}">
+        <p th:case="'list_el2'" th:text="${bean1.bean2.getProp3()[1]}" ></p>
+        <p th:case="*" >default</p><!-- IDEA-130527-->
+    </div>
+</div>
+<div id="iterations_tests">
+    <ul th:each="it1: ${bean1.arrayProp1}">
+            <li th:text="'-'+${it1Stat.index}+' '+${it1}"></li>
+        </ul>
+        <ul th:each="it2,it2Stat: ${bean1.listProp1}">
+            <li th:text="${it2Stat.index}+' '+${it2}"></li> <!--idea-130289 -->
+        </ul>
+        <ul th:each="it3: ${bean1.mapProp1}">
+            <li th:text="${it3Stat.index}+ ' '+${it3}"></li>
+        </ul>
+</div>
+</body>
+</html>

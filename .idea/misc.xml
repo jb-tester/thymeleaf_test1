@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="EntryPointsManager">
+    <entry_points version="2.0" />
+  </component>
+  <component name="IdProvider" IDEtalkID="325194E447340C5D4B903240A69ACB98" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" assert-keyword="true" jdk-15="true" project-jdk-name="1.7.11_x86" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="SvnBranchConfigurationManager">
+    <option name="myConfigurationMap">
+      <map>
+        <entry key="$PROJECT_DIR$">
+          <value>
+            <SvnBranchConfiguration>
+              <option name="branchUrls">
+                <list>
+                  <option value="svn+ssh://unit-397/Users/jetbrains/svn_compatible_repo/thymeleaf/test1/branches" />
+                  <option value="svn+ssh://unit-397/Users/jetbrains/svn_compatible_repo/thymeleaf/test1/tags" />
+                </list>
+              </option>
+              <option name="trunkUrl" value="svn+ssh://unit-397/Users/jetbrains/svn_compatible_repo/thymeleaf/test1/trunk" />
+            </SvnBranchConfiguration>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="mySupportsUserInfoFilter" value="true" />
+  </component>
+</project>
+
