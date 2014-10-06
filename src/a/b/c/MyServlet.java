@@ -28,21 +28,26 @@ public class MyServlet extends HttpServlet {
         TemplateEngine te = new TemplateEngine();
         te.setTemplateResolver(tr);
         WebContext ctx = new WebContext(request, response, getServletConfig().getServletContext(), Locale.ENGLISH);
-        ctx.setVariable("str_var1","string_var1");
-        ctx.setVariable("str_var2","day");
-        ctx.setVariable("prop3","test1.property3");
+        // set bean1 properties
         String[] myArray = {"el1","el2"};
-        ArrayList myList = new ArrayList();
+        ArrayList<String> myList = new ArrayList<String>();// to set bean1 property of List type
         myList.add("list_el1");
         myList.add("list_el2");
-        Map myMap = new HashMap();
+        Map<String, String> myMap = new HashMap<String, String>(); // to set bean1 property of map type
         myMap.put("k1","map_val1");
         myMap.put("k2","map_val2");
         myMap.put("k3","map_val3");
 
         Bean1 bean1 = new Bean1("textprop2",1,true,myArray,myList, new Bean2("b2_1","b2_2",myList),
                 myMap );
+
+        // set context properties:
+        ctx.setVariable("str_var1","string_var1");
+        ctx.setVariable("str_var2","day");
+        ctx.setVariable("prop3","test1.property3");
         ctx.setVariable("bean1", bean1);
+
+        // process template:
         te.process("test1",ctx,response.getWriter());
         response.setContentType("text/html;charset=UTF-8");
         response.setHeader("Pragma", "no-cache");
