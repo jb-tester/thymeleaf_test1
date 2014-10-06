@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>test thymeleaf</title>
+    <title>test thymeleaf - test1</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
@@ -85,7 +85,9 @@
 <div th:fragment="local_fr1" th:if="${arg0}">
     <p th:text="${arg1}+${arg2}"/> <!-- idea-130666 -->
 </div>
-
+<p th:with="var1=${bean1.intProp1}">
+    <p th:text="${var1}"/>
+</p>
 <h1>th:remove test</h1>
   <div th:remove="all-but-first" >   <!-- idea-130671 -->
      <p th:text="'one'" ></p>
@@ -94,8 +96,32 @@
   </div>
 
 <h1> th:assert test </h1>
-<p th:assert="(${bean1.intProp1} gt 0),${bean1.boolProp1}"></p>      <!-- idea-130680 -->
-<p th:assert="(true,${bean1.boolProp1}"></p>
+<p th:assert="(${bean1.intProp1} gt 0), ${bean1.boolProp1}"></p>      <!-- idea-130680 -->
+<p th:assert="true,${bean1.boolProp1}"></p>
+<!--/*-->
+  <div th:text="'should be ignored by thymeleaf!'+${bean1.intProp1}">
+     should not be visible!
+      <p th:text="invalid expression!!! ${foo} "/>
+  </div>
+<!--*/-->
+<span>hello!</span>
+<!--/*/
+  <div th:text="${foo}">
+    some text!!!
+  </div>
+/*/-->
+<span>goodbye!</span>
 
+<h1>test including with DOM selector syntax</h1> <!-- idea-130857--->
+
+ <div th:include="included_template3::div.div1"></div>
+ <div th:include="included_template3::[//div[@class='div1']]"></div>
+ <div th:include="included_template3::[div[@title='div2']]"></div>
+ <div th:include="included_template3::div[title='div2']"></div>
+ <div th:include="included_template3::[div[@id='div3']]"></div>
+ <div th:include="included_template3::div#div3"></div>
+
+<h1> include template from different folder: </h1> <!-- idea-130851-->
+<div th:include="subtemplates/included_template4::qwerty"></div>
 </body>
 </html>

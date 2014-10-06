@@ -31,6 +31,12 @@
         <ul th:each="it3: ${bean1.mapProp1}">
             <li th:text="${it3Stat.index}+ ' '+${it3}"></li>
         </ul>
+    <h1> th:block test</h1>
+    <th:block th:each="foo: ${#dates.arrayDay(#dates.createNow())}">
+        <p th:text="${foo}"/>
+    </th:block>
+    <h1> th:inline test </h1>
+    <p th:inline="text">***[[${bean1.txtProp2}]]***</p> <!-- idea-130801 -->
 </div>
 </body>
 </html>
